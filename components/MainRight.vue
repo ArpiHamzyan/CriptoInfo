@@ -11,7 +11,7 @@
                         <div class="company">
                             <div class="company-logo">
                                 <a href="">
-                                    <img class="image"  :src="'https://api.cryptoinfo.me/'+item.image" alt="">
+                                    <img class="image"  :src="right_images +item.image" alt="">
                                 </a>
                             </div>
                             <div class="company-name">
@@ -47,7 +47,12 @@
 </template>
 
 <script setup>
-import { useMyApi } from "~/stores/MyApi";
+import { useMyApi } from "~/stores/FetchApi";
+
+
+//right images
+
+const right_images = `${useRuntimeConfig().public.cripto_api}/`;
 
 //fetch data
 const myStore = useMyApi();
@@ -61,7 +66,6 @@ const changeOffset = async () => {
     state1.value += 10;
     await myStore.fetchData2(state1.value);
     data.value = [...data.value, ...myStore.myData.posts];
-    console.log('Data fetched successfully:', myStore.myData);
   } catch (error) {
     console.error('Error fetching data:', error);
   }

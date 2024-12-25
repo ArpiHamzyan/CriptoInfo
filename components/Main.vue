@@ -5,7 +5,7 @@
                     <div v-for="(item,index) in data" :key="index" class="cards-container">
                         <div class="card">
                             <div class="card-image">
-                                <img :src="'https://api.cryptoinfo.me/uploads/posts/' + item.image" class="image"  alt="">
+                                <img :src="left_images + item.image" class="image"  alt="">
                                 <div class="post-info-panel">
                                     <div class="column">
                                         <div class="subtitle">{{formatDate(item.created_at)}}</div>
@@ -46,8 +46,11 @@
 
 <script setup>
 import MainRight from "./MainRight.vue";
-import { useMyApi } from "~/stores/MyApi";
+import { useMyApi } from "~/stores/FetchApi";
 import { useI18n } from 'vue-i18n';
+
+//left images
+const left_images = `${useRuntimeConfig().public.cripto_api}/uploads/posts/`;
 
 
 //fetch data
@@ -63,7 +66,6 @@ const changeOffset = async () => {
     state.value += 10;
     await myStore.fetchData1(state.value);
     data.value = [...data.value, ...myStore.myData.posts];
-    console.log('Data fetched successfully:', myStore.myData);
   } catch (error) {
     console.error('Error fetching data:', error);
   }

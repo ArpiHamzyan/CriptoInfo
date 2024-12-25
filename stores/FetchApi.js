@@ -1,13 +1,13 @@
 import {defineStore} from 'pinia'
 
-export const useMyApi = defineStore('MyApi',{
+export const useMyApi = defineStore('FetchApi',{
     state:() => ({
         myData: null,
     }),
     actions: {
         async fetchData() {
           try {
-            const response = await fetch(useRuntimeConfig().public.apiUrl1+'/get-settings', {
+            const response = await fetch(useRuntimeConfig().public.cripto_api+'/api/get-settings', {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -23,7 +23,7 @@ export const useMyApi = defineStore('MyApi',{
         },
         async fetchData1(state) {
           try {
-            const response = await fetch(`${useRuntimeConfig().public.apiUrl2}${state}&limit=10`, {
+            const response = await fetch(`${useRuntimeConfig().public.cripto_api}/api/get-crypto-posts?offset=${state}&limit=10`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -39,7 +39,7 @@ export const useMyApi = defineStore('MyApi',{
         },
         async fetchData2(state) {
           try {
-            const response = await fetch(`${useRuntimeConfig().public.apiUrl1+'/get-posts?offset='}${state}&limit=10`, {
+            const response = await fetch(`${useRuntimeConfig().public.cripto_api+'/api/get-posts?offset='}${state}&limit=10`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',

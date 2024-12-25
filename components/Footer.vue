@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { useMyApi } from "~/stores/MyApi";
+import { useMyApi } from "~/stores/FetchApi";
 
 
 //fetch data
@@ -66,7 +66,6 @@ const myStore = useMyApi();
 await myStore.fetchData();
 const data = myStore.myData.setting;
 const dataLogo = myStore.myData.setting.logo;
-console.log(data);
 
 //change language
 const { t, locale } = useI18n();
